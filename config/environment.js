@@ -2,6 +2,16 @@
 
 module.exports = function(environment) {
   let ENV = {
+    firebase: {
+      apiKey: "AIzaSyDlmp3hb-798gLMSIZo2MQsO_JbeCjs0TA",
+      authDomain: "ember-chat-sat.firebaseapp.com",
+      databaseURL: "https://ember-chat-sat.firebaseio.com",
+      projectId: "ember-chat-sat",
+      storageBucket: "ember-chat-sat.appspot.com",
+      messagingSenderId: "775207512644",
+      appId: "1:775207512644:web:d4a931269d06d3f58b6a11",
+      measurementId: "G-XKRWPE4Y9T",
+    },
     modulePrefix: 'ember-chat-sat',
     environment,
     rootURL: '/',
