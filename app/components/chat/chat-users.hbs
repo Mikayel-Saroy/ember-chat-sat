@@ -1,13 +1,11 @@
 <div class="col-3 chat-users">
   <div class="row">
-    <div class="col-12 chat-user-row">
-      <span>Username</span>
-      <div class="status is-active"></div>
-    </div>
-    <div class="col-12 chat-user-row">
-      <span>Username 2</span>
-      <div class="status"></div>
-    </div>
+    {{#each @users as |user|}}
+      <div class="col-12 chat-user-row">
+        <span>{{user.email}}</span>
+        <div class="status {{if user.isActive 'is-active'}}"></div>
+      </div>
+    {{/each}}
   </div>
 </div>
 

@@ -1,10 +1,12 @@
 
 <div class="chat-message-box">
-    <input type="text" class="form-control">
+  <form {{on 'submit' this.sendMessage}}>
+    <Input type="text" class="form-control" @value={{this.message}} />
 
-  <button class="btn btn-primary">
-    Send
-  </button>
+    <button type="submit" class="btn btn-primary">
+      Send
+    </button>
+  </form>
 </div>
 
 {{yield}}

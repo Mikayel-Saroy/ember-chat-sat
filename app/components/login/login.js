@@ -9,6 +9,7 @@ export default class LoginLoginComponent extends Component {
   @service firebaseApp;
   @service router;
   @service store;
+  @service userActions;
 
   @tracked email = '1@mail.ru'
   @tracked password = 'qwerty';
@@ -18,42 +19,13 @@ export default class LoginLoginComponent extends Component {
     super(...arguments);
   }
 
-  async createUser() {
-    const uid = this.session.data.authenticated.user.uid;
-
-    const user = this.store.createRecord('user', {
-      userId: uid,
-      lastLogin: Date.now(),
-      isActive: true
-    });
-
-    await user.save();
-  }
-
-  async updateUser() {
-    const uid = this.session.data.authenticated.user.uid;
-
-    const users = await this.store.query('user', {
-      where: ['userId', '==', uid],
-      limit: 1,
-    });
-    const currentUser = users.get('firstObject');
-
-    currentUser.set('lastLogin', Date.now());
-    await currentUser.save();
-  }
-
   @action
   async onSubmit() {
     const auth = await this.firebaseApp.auth();
+
     try {
       await auth.signInWithEmailAndPassword(this.email, this.password);
-
-      try {
-        await this.updateUser();
-      } catch (e) {
-        await this.createUser();
-      }
+      await this.userActions.initUserData();
 
       this.router.transitionTo('chat');
       this.email = "";

@@ -7,6 +7,7 @@ export default class RegistrationRegistrationComponent extends Component {
   @service session;
   @service firebaseApp;
   @service router;
+  @service userActions;
 
   @tracked email;
   @tracked password;
@@ -17,6 +18,7 @@ export default class RegistrationRegistrationComponent extends Component {
     const auth = await this.firebaseApp.auth();
     try {
       await auth.createUserWithEmailAndPassword(this.email, this.password);
+      await this.userActions.initUserData();
       this.router.transitionTo('chat');
       this.email = "";
       this.password = "";
