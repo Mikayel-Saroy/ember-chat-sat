@@ -25,12 +25,11 @@ export default class ChatChatMessagesComponent extends Component {
         snapshot.docChanges().forEach((change) => {
           if (change.type === "added") {
             this.messages.pushObject(change.doc.data());
-            // console.log(document.body);
-            // console.log(document.querySelector("messages-content"));
-            //
-            // window.scrollTo(0, document.body.scrollHeight);
-            // window.scrollTo(0, document.getElementById("abc").scrollHeight);
-            // document.getElementById('abc').offsetTop;
+            setTimeout(() => {
+              const container = document.querySelector(".messages-content");
+              // console.log({container});
+              container.scrollTo(0, container.scrollHeight);
+            });
           }
         });
       });

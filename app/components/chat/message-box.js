@@ -10,7 +10,9 @@ export default class ChatMessageBoxComponent extends Component {
   @action
   async sendMessage(event) {
     event.preventDefault();
-    await this.userActions.sendMessage(this.message);
-    this.message = '';
+    if (this.message.trim()) {
+      await this.userActions.sendMessage(this.message);
+      this.message = '';
+    }
   }
 }
