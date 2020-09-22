@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row py-5">
+    <div class="col">
+      <h4>Sign up</h4>
+      <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{fn this.onSubmit}} as |form|>
+        <form.element @controlType="email" @label="Email" placeholder="Email" @property="email" required />
+        <form.element @controlType="password" @label="Password" placeholder="Password" @property="password" />
+        <form.submitButton>Sign Up</form.submitButton>
+      </BsForm>
+    </div>
+  </div>
+</div>
+
+{{yield}}

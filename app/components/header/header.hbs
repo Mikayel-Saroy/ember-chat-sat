@@ -1,0 +1,26 @@
+<BsNavbar
+        @type="dark"
+        @backgroundColor="dark"
+        @collapsed={{true}} as |navbar|>
+  <div class="navbar-header">
+    {{#link-to "index" class="navbar-brand"}}Chat{{/link-to}}
+  </div>
+  <navbar.content>
+    <navbar.nav as |nav|>
+      {{#if this.session.isAuthenticated}}
+        <nav.item>
+          <button class="btn btn-default text-light" {{on "click" this.logout}}>Logout</button>
+        </nav.item>
+      {{else}}
+        <nav.item>
+          <nav.link-to @route="login">Login</nav.link-to>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="registration">Registration</nav.link-to>
+        </nav.item>
+      {{/if}}
+    </navbar.nav>
+  </navbar.content>
+</BsNavbar>
+
+{{yield}}
