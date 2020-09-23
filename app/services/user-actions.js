@@ -15,7 +15,7 @@ export default class UserActionsService extends Service {
       isActive: true,
     }, { merge: true });
 
-    return this.store.findRecord('user', uid);
+    return this.store.findRecord('user', uid);  //  ???
   }
 
   async sendMessage(message) {

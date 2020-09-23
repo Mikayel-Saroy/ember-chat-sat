@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import firebase from 'firebase/app';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 

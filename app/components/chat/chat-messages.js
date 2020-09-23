@@ -26,8 +26,8 @@ export default class ChatChatMessagesComponent extends Component {
           if (change.type === "added") {
             this.messages.pushObject(change.doc.data());
             setTimeout(() => {
-              const container = document.querySelector(".messages-content");
               // console.log({container});
+              const container = document.querySelector(".messages-content");
               container.scrollTo(0, container.scrollHeight);
             });
           }
