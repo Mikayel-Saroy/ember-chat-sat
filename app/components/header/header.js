@@ -24,9 +24,4 @@ export default class HeaderHeaderComponent extends Component {
     }, {merge: true});
     await this.session.invalidate();
   }
-
-
-  // @action testFunction() {
-  //   console.log(this.session);
-  // }
 }

@@ -20,8 +20,6 @@ export default class UserStatusService extends Service {
       state: 'online',
       last_changed: firebase.database.ServerValue.TIMESTAMP,
     };
-    console.log("<<<----");
-    console.log(uid, "<----");
     database.ref('.info/connected').on('value', function (snapshot) {
       // If we're not currently connected, don't do anything.
       if (status === "logout") {

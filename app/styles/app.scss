@@ -1,6 +1,7 @@
 @import "ember-bootstrap/bootstrap";
 
 $chat-height: calc(100vh - 56px);
+$red-color: #ff2800;
 
 .chat-users {
   height: $chat-height;
@@ -93,4 +94,11 @@ $chat-height: calc(100vh - 56px);
       margin-right: 10px;
     }
   }
+}
+
+.not_found_page {
+  font-size: 33px;
+  color: $red-color;
+  text-align: center;
+  padding-top: 25px;
 }
