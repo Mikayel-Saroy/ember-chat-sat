@@ -1,8 +1,21 @@
 import Service, {inject as service} from '@ember/service';
+import { action } from '@ember/object';
 import firebase from 'firebase/app';
+
 
 export default class UserStatusService extends Service {
   @service firebaseApp;
+  @service session;
+
+  @action async unexpectedClosing() {
+    const uid = this.session.data.authenticated.user.uid;
+    const firestore = await this.firebaseApp.firestore();
+
+    await firestore.collection('users').doc(uid).set({
+      isActive: false,
+    }, {merge: true});
+    await this.session.invalidate();
+  }
 
   async initUserStatus(status) {
 
@@ -21,15 +34,16 @@ export default class UserStatusService extends Service {
       last_changed: firebase.database.ServerValue.TIMESTAMP,
     };
     database.ref('.info/connected').on('value', function (snapshot) {
-      // If we're not currently connected, don't do anything.
       if (status === "logout") {
         userStatusDatabaseRef.set(isOfflineForDatabase);
         return;
       }
+
+      // If we're not currently connected, don't do anything.
       if (snapshot.val() === false) {
+        this.unexpectedClosing();
         return;
       }
-
 
       // If we are currently connected, then use the 'onDisconnect()'
       // method to add a set which will only trigger once this
@@ -45,6 +59,6 @@ export default class UserStatusService extends Service {
         // server will mark us as offline once we lose connection.
         userStatusDatabaseRef.set(isOnlineForDatabase);
       });
-    });
+    }, this);
   }
 }
