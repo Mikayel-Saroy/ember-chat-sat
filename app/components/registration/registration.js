@@ -31,7 +31,7 @@ export default class RegistrationRegistrationComponent extends Component {
       await this.userActions.initUserData();
       await this.userStatus.initUserStatus();
       this.validation = this.userActions.validationFunction(true, this.validation);
-      this.router.transitionTo('chat');
+      this.router.transitionTo('chat');  // <<<<<<<<
     } catch (error) {
       console.log(error);
       this.validation = this.userActions.validationFunction(false, this.validation);
