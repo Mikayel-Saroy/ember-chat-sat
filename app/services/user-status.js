@@ -1,16 +1,16 @@
-import Service, { inject as service } from '@ember/service';
+import Service, {inject as service} from '@ember/service';
 import firebase from 'firebase/app';
 
 export default class UserStatusService extends Service {
   @service firebaseApp;
 
-  async initUserStatus() {
+  async initUserStatus(status) {
+
     const auth = await this.firebaseApp.auth();
     const database = await this.firebaseApp.database();
 
     const uid = auth.currentUser.uid;
     const userStatusDatabaseRef = database.ref('/status/' + uid);
-
     const isOfflineForDatabase = {
       state: 'offline',
       last_changed: firebase.database.ServerValue.TIMESTAMP,
@@ -20,12 +20,18 @@ export default class UserStatusService extends Service {
       state: 'online',
       last_changed: firebase.database.ServerValue.TIMESTAMP,
     };
-
+    console.log("<<<----");
+    console.log(uid, "<----");
     database.ref('.info/connected').on('value', function (snapshot) {
       // If we're not currently connected, don't do anything.
+      if (status === "logout") {
+        userStatusDatabaseRef.set(isOfflineForDatabase);
+        return;
+      }
       if (snapshot.val() === false) {
         return;
       }
+
 
       // If we are currently connected, then use the 'onDisconnect()'
       // method to add a set which will only trigger once this

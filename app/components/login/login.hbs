@@ -3,8 +3,10 @@
     <div class="col">
       <h4>Sign In</h4>
       <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{fn this.onSubmit}} as |form|>
-        <form.element @controlType="email" @label="Email" placeholder="Email" @property="email" required />
-        <form.element @controlType="password" @label="Password" placeholder="Password" @property="password" />
+        <form.element style="color: {{this.validation.isErrorColor}}" @controlType="email" @label={{this.validation.labelMessageLogin}}
+                      placeholder="Email" @property="validation.email" required/>
+        <form.element style="color: {{this.validation.isErrorColor}}" @controlType="password" @label={{this.validation.labelMessageRegistration}}
+                      placeholder="Password" @property="validation.password"/>
         <form.submitButton>Sign in</form.submitButton>
       </BsForm>
     </div>
