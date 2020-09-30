@@ -8,6 +8,7 @@ export default class ChatChatMessagesComponent extends Component {
   @service session;
   @tracked messages = [];
 
+
   get orderedMessages() {
     return this.messages;
   }

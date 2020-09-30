@@ -4,14 +4,7 @@
 
     {{#each this.messages as |message|}}
       {{#if (eq currentUserUid message.userUid)}}
-        <div class="user-message self">
-          <div>
-            {{message.content}}
-          </div>
-          <div class="date_and_time">
-            {{message.dateAndTime}}
-          </div>
-        </div>
+        <Chat::SelfMessage::SelfMessage @message={{message}}/>
       {{else}}
         <div class="user-message">
           <div class="username">{{message.email}}</div>

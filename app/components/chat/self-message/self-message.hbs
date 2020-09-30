@@ -1,0 +1,24 @@
+<div class="user-message self">
+  {{#if this.viewMode}}
+    <div>
+      <div>
+        {{@message.content}}
+      </div>
+      <img src="assets/images/edit_icon.png" alt="Edit" {{on 'click' this.changeMode}}/>
+      <div class="date_and_time">
+        {{@message.dateAndTime}}
+      </div>
+    </div>
+  {{else}}
+    <Input @value={{this.editMessage}}/>
+    <div class="edit_cancel_buttons">
+      <div class="cancel_button">
+        <button class="btn btn-secondary" {{on 'click' this.changeMode}}><p>Cancel</p></button>
+      </div>
+      <div class="edit_button">
+        <button class="btn btn-primary" {{on 'click' this.submitEditedMessage}}><p>Edit</p></button>
+      </div>
+    </div>
+  {{/if}}
+</div>
+

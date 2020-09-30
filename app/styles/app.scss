@@ -76,8 +76,52 @@ $red-color: #ff2800;
         color: black;
         padding: 10px;
 
+        img {
+          float: right;
+          margin-left: -12px;
+          margin-top: -15px;
+          height: 12px;
+        }
+
+        input {
+          outline: none;
+          width: 100%;
+        }
+
+        .edit_cancel_buttons {
+          display: grid;
+          grid-template-columns: calc(100% - 85px) 85px;
+
+          .cancel_button {
+            button {
+              margin-top: 5px;
+              width: 80px;
+              height: 30px;
+              margin-left: calc(100% - 60px);
+
+              p {
+                margin-top: -4px;
+              }
+            }
+          }
+
+          .edit_button {
+            button {
+              margin-top: 5px;
+              width: 60px;
+              height: 30px;
+              margin-left: calc(100% - 60px);
+
+              p {
+                margin-top: -4px;
+              }
+            }
+          }
+        }
+
         &:hover {
           background-color: rgb(230, 230, 230);
+          cursor: pointer;
         }
       }
 
