@@ -16,11 +16,19 @@ $red-color: #ff2800;
     padding: 0 10px;
     align-items: center;
 
+    .login_time {
+      font-size: 12px;
+      font-family: Courier, serif;
+      padding-right: 10px;
+    }
+
     &:hover {
       background-color: lightgrey;
     }
 
     .status {
+      margin-top: 9px;
+      float: right;
       width: 10px;
       height: 10px;
       border: 1px solid green;
@@ -108,4 +116,8 @@ $red-color: #ff2800;
   text-align: right;
   font-family: Courier, serif;
   margin-bottom: -7px;
+}
+
+.current_time {
+  color: white;
 }

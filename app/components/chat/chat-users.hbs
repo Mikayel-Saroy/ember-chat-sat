@@ -3,7 +3,10 @@
     {{#each @users as |user|}}
       <div class="col-12 chat-user-row">
         <span>{{user.email}}</span>
-        <div class="status {{if user.isActive 'is-active'}}"></div>
+        <div>
+          <span class="login_time">{{user.lastLoginTime}}</span>
+          <div class="status {{if user.isActive 'is-active'}}"></div>
+        </div>
       </div>
     {{/each}}
   </div>

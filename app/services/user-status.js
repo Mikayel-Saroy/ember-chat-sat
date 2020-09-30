@@ -34,6 +34,7 @@ export default class UserStatusService extends Service {
       last_changed: firebase.database.ServerValue.TIMESTAMP,
     };
     database.ref('.info/connected').on('value', function (snapshot) {
+
       if (status === "logout") {
         userStatusDatabaseRef.set(isOfflineForDatabase);
         return;

@@ -21,6 +21,7 @@ export default class UserActionsService extends Service {
       email,
       lastLogin: Date.now(),
       isActive: true,
+      lastLoginTime: this.getTimeAndDate(),
     }, {merge: true});
 
     return this.store.findRecord('user', uid);
@@ -28,7 +29,11 @@ export default class UserActionsService extends Service {
 
   getTimeAndDate() {
     let date = new Date();
-    return `${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getHours()}:${date.getMinutes()}`;
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    if (minutes < 10) minutes = '0' + minutes;
+    if (hours < 10) hours = '0' + hours;
+    return `${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${hours}:${minutes}`;
   }
 
   async sendMessage(message) {

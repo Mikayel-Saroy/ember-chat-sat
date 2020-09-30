@@ -1,12 +1,26 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import {action} from '@ember/object';
+import {inject as service} from '@ember/service';
+import {tracked} from "@glimmer/tracking";
+
 
 export default class HeaderHeaderComponent extends Component {
   @service session;
   @service router;
   @service firebaseApp;
   @service userStatus;
+  @service userActions;
+
+  @tracked currentTime;
+
+  @action currentTimeFunction() {
+    setInterval(() => {
+      let timeWithMinutes = this.userActions.getTimeAndDate();
+      let seconds = new Date().getSeconds();
+      if (seconds < 10) seconds = "0" + seconds;
+      this.currentTime = timeWithMinutes.concat(`:${seconds}`);
+    }, 1000);
+  }
 
   @action logout() {
     this.userStatus.initUserStatus("logout");
@@ -15,7 +29,8 @@ export default class HeaderHeaderComponent extends Component {
     });
   }
 
-  @action async logoutStep() {
+  @action
+  async logoutStep() {
     const uid = this.session.data.authenticated.user.uid;
     const firestore = await this.firebaseApp.firestore();
 

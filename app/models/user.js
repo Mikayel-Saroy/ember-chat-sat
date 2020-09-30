@@ -5,4 +5,5 @@ export default class UserModel extends Model {
   @attr lastLogin;
   @attr isActive;
   @attr email;
+  @attr lastLoginTime;
 }
