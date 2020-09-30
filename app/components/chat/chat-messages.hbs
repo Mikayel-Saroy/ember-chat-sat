@@ -5,17 +5,25 @@
     {{#each this.messages as |message|}}
       {{#if (eq currentUserUid message.userUid)}}
         <div class="user-message self">
-          {{message.content}}
+          <div>
+            {{message.content}}
+          </div>
+          <div class="date_and_time">
+            {{message.dateAndTime}}
+          </div>
         </div>
       {{else}}
         <div class="user-message">
           <div class="username">{{message.email}}</div>
           {{message.content}}
+          <div class="date_and_time">
+            {{message.dateAndTime}}
+          </div>
         </div>
       {{/if}}
     {{/each}}
   </div>
 
-  <Chat::MessageBox />
+  <Chat::MessageBox/>
 </div>
 {{yield}}

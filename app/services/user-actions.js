@@ -6,6 +6,7 @@ const LABEL_LOGIN_DEFAULT_MESSAGE = "Email";
 const LABEL_REGISTRATION_DEFAULT_MESSAGE = "Password";
 const DEFAULT_COLOR = "black";
 const ERROR_COLOR = "red";
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export default class UserActionsService extends Service {
   @service session;
@@ -25,14 +26,21 @@ export default class UserActionsService extends Service {
     return this.store.findRecord('user', uid);
   }
 
+  getTimeAndDate() {
+    let date = new Date();
+    return `${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getHours()}:${date.getMinutes()}`;
+  }
+
   async sendMessage(message) {
     const {uid, email} = this.session.data.authenticated.user;
     const messageModel = this.store.createRecord('message', {
       userUid: uid,
       email,
       content: message,
-      createdAtUnix: Date.now()
+      createdAtUnix: Date.now(),
+      dateAndTime: this.getTimeAndDate(),
     });
+    console.log(this.getTimeAndDate());
 
     return messageModel.save();
   }

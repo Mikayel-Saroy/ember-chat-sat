@@ -17,6 +17,11 @@ export default class ChatChatMessagesComponent extends Component {
   }
 
   @action
+  getTime() {
+    return 12;
+  }
+
+  @action
   async loadMessages() {
     const firestore = await this.firebaseApp.firestore();
     firestore.collection('messages')
