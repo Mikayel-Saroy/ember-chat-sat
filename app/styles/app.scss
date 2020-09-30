@@ -65,12 +65,20 @@ $red-color: #ff2800;
       margin-bottom: 10px;
       position: relative;
 
+      &:hover {
+        background-color: rgb(90, 135, 212);
+      }
+
       &.self {
         background-color: white;
         border: 1px solid darkgrey;
         margin-left: auto;
         color: black;
         padding: 10px;
+
+        &:hover {
+          background-color: rgb(230, 230, 230);
+        }
       }
 
       .username {
