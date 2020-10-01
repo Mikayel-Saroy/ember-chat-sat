@@ -60,10 +60,18 @@ $red-color: #ff2800;
       max-width: 30%;
       padding: 15px 10px 10px 10px;
       background-color: cornflowerblue;
-      color: white;
       border-radius: 10px;
       margin-bottom: 10px;
       position: relative;
+
+      .message_more {
+        position: absolute;
+        font-size: 12px;
+        text-align: right;
+        font-family: Courier, serif;
+        margin-top: -11px;
+        margin-left: 10px;
+      }
 
       &:hover {
         background-color: rgb(90, 135, 212);

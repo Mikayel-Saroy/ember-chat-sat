@@ -1,23 +1,16 @@
 import Service, {inject as service} from '@ember/service';
-import { action } from '@ember/object';
 import firebase from 'firebase/app';
+import { tracked } from '@glimmer/tracking';
+
 
 
 export default class UserStatusService extends Service {
   @service firebaseApp;
   @service session;
 
-  @action async unexpectedClosing() {
-    const uid = this.session.data.authenticated.user.uid;
-    const firestore = await this.firebaseApp.firestore();
+  @tracked userStatuses = {};
 
-    await firestore.collection('users').doc(uid).set({
-      isActive: false,
-    }, {merge: true});
-    await this.session.invalidate();
-  }
-
-  async initUserStatus(status) {
+  async initUserStatus() {
 
     const auth = await this.firebaseApp.auth();
     const database = await this.firebaseApp.database();
@@ -33,19 +26,14 @@ export default class UserStatusService extends Service {
       state: 'online',
       last_changed: firebase.database.ServerValue.TIMESTAMP,
     };
-    database.ref('.info/connected').on('value', function (snapshot) {
 
-      if (status === "logout") {
-        userStatusDatabaseRef.set(isOfflineForDatabase);
-        return;
-      }
+
+    database.ref('.info/connected').on('value', function (snapshot) {
 
       // If we're not currently connected, don't do anything.
       if (snapshot.val() === false) {
-        this.unexpectedClosing();
         return;
       }
-
       // If we are currently connected, then use the 'onDisconnect()'
       // method to add a set which will only trigger once this
       // client has disconnected by closing the app,
@@ -61,5 +49,33 @@ export default class UserStatusService extends Service {
         userStatusDatabaseRef.set(isOnlineForDatabase);
       });
     }, this);
+  }
+
+  async onLogout() {
+    const isOfflineForDatabase = {
+      state: 'offline',
+      last_changed: firebase.database.ServerValue.TIMESTAMP,
+    };
+
+    const auth = await this.firebaseApp.auth();
+    const database = await this.firebaseApp.database();
+
+    const uid = auth.currentUser.uid;
+    const userStatusDatabaseRef = database.ref('/status/' + uid);
+    console.log('on logout');
+    userStatusDatabaseRef.set(isOfflineForDatabase);
+  }
+
+  async subscribeToUsersStatuses() {
+    console.log('subscribe');
+    const auth = await this.firebaseApp.auth();
+    const database = await this.firebaseApp.database();
+
+    const uid = auth.currentUser.uid;
+    const userStatusesDatabaseRef = database.ref('/status/');
+
+    userStatusesDatabaseRef.on('value', (snapshot) => {
+      this.userStatuses = snapshot.val();
+    });
   }
 }

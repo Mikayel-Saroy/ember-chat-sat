@@ -4,6 +4,7 @@ import {inject as service} from '@ember/service';
 export default class ChatRoute extends Route {
 
   @service session;
+  @service userStatus;
 
   beforeModel(transition) {
     if (!this.session.isAuthenticated) {
@@ -12,6 +13,7 @@ export default class ChatRoute extends Route {
   }
 
   model() {
+    this.userStatus.subscribeToUsersStatuses();
     return this.store.query('user', { orderBy: { lastLogin: 'desc' } });
   };
 };

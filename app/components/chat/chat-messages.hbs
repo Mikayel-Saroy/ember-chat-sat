@@ -3,16 +3,29 @@
   <div {{did-insert this.loadMessages}} class="messages-content">
 
     {{#each this.messages as |message|}}
+
       {{#if (eq currentUserUid message.userUid)}}
         <Chat::SelfMessage::SelfMessage @message={{message}}/>
       {{else}}
-        <div class="user-message">
-          <div class="username">{{message.email}}</div>
-          {{message.content}}
-          <div class="date_and_time">
-            {{message.dateAndTime}}
+        {{#if message.isNewMessage}}
+          <div class="user-message" style="color: {{this.newColor}}">
+            <div class="username">{{message.email}}</div>
+            {{message.content}}
+            <div class="date_and_time">
+              {{message.dateAndTime}}
+            </div>
+            <div class="message_more">{{message.more}}</div>
           </div>
-        </div>
+        {{else}}
+          <div class="user-message" style="color: {{this.defaultColor}}">
+            <div class="username">{{message.email}}</div>
+            {{message.content}}
+            <div class="date_and_time">
+              {{message.dateAndTime}}
+            </div>
+            <div class="message_more">{{message.more}}</div>
+          </div>
+        {{/if}}
       {{/if}}
     {{/each}}
   </div>
@@ -20,3 +33,4 @@
   <Chat::MessageBox/>
 </div>
 {{yield}}
+

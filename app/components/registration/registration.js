@@ -29,7 +29,7 @@ export default class RegistrationRegistrationComponent extends Component {
     try {
       await auth.createUserWithEmailAndPassword(this.validation.email, this.validation.password);
       await this.userActions.initUserData();
-      await this.userStatus.initUserStatus();
+      this.userStatus.initUserStatus();
       this.validation = this.userActions.validationFunction(true, this.validation);
       this.router.transitionTo('chat');
     } catch (error) {

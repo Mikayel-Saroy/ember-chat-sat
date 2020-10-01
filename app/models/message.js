@@ -6,4 +6,5 @@ export default class MessageModel extends Model {
   @attr content;
   @attr createdAtUnix;
   @attr dateAndTime;
+  @attr more;
 }

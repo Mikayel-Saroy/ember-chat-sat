@@ -1,4 +1,5 @@
 import Service, {inject as service} from '@ember/service';
+import {tracked} from "@glimmer/tracking";
 
 const LABEL_LOGIN_ERROR_MESSAGE = "Email: Enter a Valid Data";
 const LABEL_REGISTRATION_ERROR_MESSAGE = "Password: Enter a Valid Data";
@@ -9,13 +10,17 @@ const ERROR_COLOR = "red";
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export default class UserActionsService extends Service {
-  @service session;
-  @service store;
   @service firebaseApp;
+  @service store;
+  @service session;
+  @tracked myLastLoginTime;
 
   async initUserData() {
-    const firestore = await this.firebaseApp.firestore();
     const {uid, email} = this.session.data.authenticated.user;
+    const firestore = await this.firebaseApp.firestore();
+    this.myLastLoginTime = await firestore.collection("users").doc(uid).get();
+    this.myLastLoginTime = this.myLastLoginTime.data().lastLogin;
+    console.log(this.myLastLoginTime);
     await firestore.collection('users').doc(uid).set({
       uid,
       email,
@@ -23,6 +28,7 @@ export default class UserActionsService extends Service {
       isActive: true,
       lastLoginTime: this.getTimeAndDate(),
     }, {merge: true});
+
 
     return this.store.findRecord('user', uid);
   }
@@ -36,7 +42,7 @@ export default class UserActionsService extends Service {
     return `${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${hours}:${minutes}`;
   }
 
-  async sendMessage(message) {
+  sendMessage(message) {
     const {uid, email} = this.session.data.authenticated.user;
     const messageModel = this.store.createRecord('message', {
       userUid: uid,
@@ -44,6 +50,7 @@ export default class UserActionsService extends Service {
       content: message,
       createdAtUnix: Date.now(),
       dateAndTime: this.getTimeAndDate(),
+      more: "",
     });
     console.log(this.getTimeAndDate());
 

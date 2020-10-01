@@ -23,7 +23,6 @@ export default class HeaderHeaderComponent extends Component {
   }
 
   @action logout() {
-    this.userStatus.initUserStatus("logout");
     this.logoutStep().then(() => {
       this.router.transitionTo("login");
     });
@@ -31,12 +30,17 @@ export default class HeaderHeaderComponent extends Component {
 
   @action
   async logoutStep() {
+    let now = this.userActions.getTimeAndDate();
+    console.log(now, "NOW");
+    console.log(this.session.data.authenticated.user.uid, "<---");
     const uid = this.session.data.authenticated.user.uid;
     const firestore = await this.firebaseApp.firestore();
-
-    await firestore.collection('users').doc(uid).set({
-      isActive: false,
-    }, {merge: true});
+    await this.userStatus.onLogout();
     await this.session.invalidate();
+    await firestore.collection('users').doc(uid).set({
+      lastLogin: Date.now(),
+      lastLoginTime: this.userActions.getTimeAndDate(),
+    }, {merge: true});
+
   }
 }

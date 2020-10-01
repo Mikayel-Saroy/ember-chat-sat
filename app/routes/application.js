@@ -3,8 +3,11 @@ import {inject as service} from '@ember/service';
 
 export default class ApplicationRoute extends Route {
   @service userStatus;
+  @service session;
 
   beforeModel() {
-    this.userStatus.initUserStatus();
+    if (this.session.isAuthenticated) {
+      this.userStatus.initUserStatus();
+    }
   }
 }

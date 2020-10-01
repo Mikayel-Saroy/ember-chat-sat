@@ -35,8 +35,8 @@ export default class LoginLoginComponent extends Component {
     try {
       await auth.signInWithEmailAndPassword(this.validation.email, this.validation.password);
       await this.userActions.initUserData();
-      await this.userStatus.initUserStatus();
       this.validation = this.userActions.validationFunction(true, this.validation);
+      await this.userStatus.initUserStatus();
       this.router.transitionTo('chat');
     } catch (error) {
       console.log(error);
