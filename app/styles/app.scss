@@ -64,6 +64,9 @@ $red-color: #ff2800;
       margin-bottom: 10px;
       position: relative;
 
+      .new_message_mark {
+      }
+
       .message_more {
         position: absolute;
         font-size: 12px;
@@ -135,6 +138,14 @@ $red-color: #ff2800;
 
       .username {
         position: absolute;
+        top: 3px;
+        height: 5px;
+        font-size: 10px;
+      }
+
+      .new_message_mark {
+        position: absolute;
+        left: calc(100% - 75px);
         top: 3px;
         height: 5px;
         font-size: 10px;

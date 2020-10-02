@@ -31,8 +31,6 @@ export default class HeaderHeaderComponent extends Component {
   @action
   async logoutStep() {
     let now = this.userActions.getTimeAndDate();
-    console.log(now, "NOW");
-    console.log(this.session.data.authenticated.user.uid, "<---");
     const uid = this.session.data.authenticated.user.uid;
     const firestore = await this.firebaseApp.firestore();
     await this.userStatus.onLogout();

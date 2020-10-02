@@ -62,12 +62,10 @@ export default class UserStatusService extends Service {
 
     const uid = auth.currentUser.uid;
     const userStatusDatabaseRef = database.ref('/status/' + uid);
-    console.log('on logout');
     userStatusDatabaseRef.set(isOfflineForDatabase);
   }
 
   async subscribeToUsersStatuses() {
-    console.log('subscribe');
     const auth = await this.firebaseApp.auth();
     const database = await this.firebaseApp.database();
 

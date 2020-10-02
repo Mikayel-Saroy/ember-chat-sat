@@ -20,7 +20,6 @@ export default class UserActionsService extends Service {
     const firestore = await this.firebaseApp.firestore();
     this.myLastLoginTime = await firestore.collection("users").doc(uid).get();
     this.myLastLoginTime = this.myLastLoginTime.data().lastLogin;
-    console.log(this.myLastLoginTime);
     await firestore.collection('users').doc(uid).set({
       uid,
       email,
@@ -52,8 +51,6 @@ export default class UserActionsService extends Service {
       dateAndTime: this.getTimeAndDate(),
       more: "",
     });
-    console.log(this.getTimeAndDate());
-
     return messageModel.save();
   }
 

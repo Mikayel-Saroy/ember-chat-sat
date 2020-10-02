@@ -23,7 +23,6 @@ export default class LoginLoginComponent extends Component {
     @tracked labelMessageRegistration: LABEL_REGISTRATION_DEFAULT_MESSAGE,
   }
 
-
   constructor() {
     super(...arguments);
   }

@@ -10,6 +10,7 @@
         {{#if message.isNewMessage}}
           <div class="user-message" style="color: {{this.newColor}}">
             <div class="username">{{message.email}}</div>
+            <div class="new_message_mark">{{this.newMessageMark}}</div>
             {{message.content}}
             <div class="date_and_time">
               {{message.dateAndTime}}
