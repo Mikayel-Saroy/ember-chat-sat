@@ -32,6 +32,7 @@ export default class ChatChatMessagesComponent extends Component {
   @tracked newColor = NEW_COLOR;
   @tracked newMessageMark = NEW_MESSAGE_MARK;
   @tracked newMessagesCount = 0;
+  @tracked isMouseOver = false;
 
   get orderedMessages() {
     return this.messages;
@@ -39,6 +40,11 @@ export default class ChatChatMessagesComponent extends Component {
 
   get currentUserUid() {
     return this.session.data.authenticated.user.uid;
+  }
+
+  @action
+  mouseOverFunction() {
+    this.isMouseOver = true;
   }
 
   @action

@@ -57,7 +57,7 @@ $red-color: #ff2800;
     padding: 20px;
 
     .user-message {
-      max-width: 30%;
+      max-width: 40%;
       padding: 15px 10px 10px 10px;
       background-color: cornflowerblue;
       border-radius: 10px;
@@ -77,7 +77,7 @@ $red-color: #ff2800;
       }
 
       &:hover {
-        background-color: rgb(90, 135, 212);
+        border-right: 75px solid rgb(90, 135, 212);;
       }
 
       &.self {

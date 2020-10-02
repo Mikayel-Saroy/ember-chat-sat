@@ -1,37 +1,15 @@
 <div class="col-9 chat-messages">
-
   <div {{did-insert this.loadMessages}} class="messages-content">
-
     {{#each this.messages as |message|}}
-
-      {{#if (eq currentUserUid message.userUid)}}
-        <Chat::SelfMessage::SelfMessage @message={{message}}/>
-      {{else}}
-        {{#if message.isNewMessage}}
-          <div class="user-message" style="color: {{this.newColor}}">
-            <div class="username">{{message.email}}</div>
-            <div class="new_message_mark">{{this.newMessageMark}}</div>
-            {{message.content}}
-            <div class="date_and_time">
-              {{message.dateAndTime}}
-            </div>
-            <div class="message_more">{{message.more}}</div>
-          </div>
-        {{else}}
-          <div class="user-message" style="color: {{this.defaultColor}}">
-            <div class="username">{{message.email}}</div>
-            {{message.content}}
-            <div class="date_and_time">
-              {{message.dateAndTime}}
-            </div>
-            <div class="message_more">{{message.more}}</div>
-          </div>
-        {{/if}}
-      {{/if}}
+      <Chat::SingleMessage::SingleMessage @message={{message}}
+                                          @currentUserUid={{this.currentUserUid}}
+                                          @newMessageMark={{this.newMessageMark}}
+                                          @defaultColor={{this.defaultColor}}
+                                          @newColor={{this.newColor}} />
     {{/each}}
   </div>
-
   <Chat::MessageBox/>
 </div>
-{{yield}}
 
+
+{{yield}}
