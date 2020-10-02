@@ -192,3 +192,29 @@ $red-color: #ff2800;
 .current_time {
   color: white;
 }
+
+.notification_icon {
+  padding-left: 30px;
+  padding-right: 60px;
+
+  img {
+    margin-top: 10px;
+    height: 20px;
+  }
+
+  .notification_count {
+    position: absolute;
+    margin-top: -26px;
+    margin-left: 25px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: cornflowerblue;
+
+    p {
+      color: white;
+      text-align: center;
+      margin-top: 3px;
+    }
+  }
+}

@@ -9,6 +9,18 @@
     <navbar.nav as |nav|>
       {{#if this.session.isAuthenticated}}
         <nav.item>
+          <div class="notification_icon">
+            <span>
+              <img src="assets/images/notification_icon.png" alt="Notifications"/>
+            </span>
+            <span>
+              <div class="notification_count" style="width: {{this.userStatus.notificationStatusWidth}}"><p>
+                {{this.userStatus.newNotifications}}
+              </p></div>
+            </span>
+          </div>
+        </nav.item>
+        <nav.item>
           <button class="btn btn-default text-light" {{on "click" this.logout}}>Logout</button>
         </nav.item>
       {{else}}

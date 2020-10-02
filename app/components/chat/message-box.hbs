@@ -1,6 +1,6 @@
 <div class="chat-message-box">
   <form {{on 'submit' this.sendMessage}}>
-    <Input type="text" class="form-control" @value={{this.message}} />
+    <Input type="text" class="form-control" @value={{this.message}} {{on "click" this.resetNotificationCount}} />
     <button type="submit" class="btn btn-primary">Send</button>
   </form>
 </div>

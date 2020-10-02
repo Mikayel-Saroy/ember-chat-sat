@@ -6,6 +6,12 @@ import {inject as service} from '@ember/service';
 export default class ChatMessageBoxComponent extends Component {
   @tracked message = '';
   @service userActions;
+  @service userStatus;
+
+  @action
+  resetNotificationCount() {
+    this.userStatus.newNotifications = 0;
+  }
 
   @action
   sendMessage(event) {

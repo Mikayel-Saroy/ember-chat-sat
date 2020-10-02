@@ -25,11 +25,13 @@ export default class ChatChatMessagesComponent extends Component {
   @service firebaseApp;
   @service session;
   @service userActions;
+  @service userStatus;
 
   @tracked messages = [];
   @tracked defaultColor = DEFAULT_COLOR;
   @tracked newColor = NEW_COLOR;
   @tracked newMessageMark = NEW_MESSAGE_MARK;
+  @tracked newMessagesCount = 0;
 
   get orderedMessages() {
     return this.messages;
@@ -51,6 +53,7 @@ export default class ChatChatMessagesComponent extends Component {
           let currentMessageUnix = change.doc.data().createdAtUnix;
 
           isNew = currentMessageUnix > myLastLoginTime;
+          this.newMessagesCount += isNew;
           if (change.type === "added") {
             const message = new Message({
               id: change.doc.id,
@@ -71,10 +74,13 @@ export default class ChatChatMessagesComponent extends Component {
             }
           }
         });
+        this.userStatus.newNotifications = this.newMessagesCount;
+        this.newMessagesCount = 0;
+
         setTimeout(() => {
           this.newColor = DEFAULT_COLOR;
           this.newMessageMark = '';
-        }, 3000);
+        }, 5000);
       });
   }
 }
