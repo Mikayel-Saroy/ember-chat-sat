@@ -50,6 +50,7 @@ export default class UserActionsService extends Service {
       createdAtUnix: Date.now(),
       dateAndTime: this.getTimeAndDate(),
       more: "",
+      likedBy: [],
     });
     return messageModel.save();
   }

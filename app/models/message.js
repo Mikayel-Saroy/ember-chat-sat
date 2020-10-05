@@ -7,4 +7,5 @@ export default class MessageModel extends Model {
   @attr createdAtUnix;
   @attr dateAndTime;
   @attr more;
+  @attr likedBy;
 }

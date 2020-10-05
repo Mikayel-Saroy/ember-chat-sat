@@ -10,11 +10,17 @@
     </div>
     <div class="side_box_actions">
       <div class="likes_count">
-        <p>789</p>
+        <p>{{this.likesCount}}</p>
       </div>
+      {{#if this.isLikeButtonPressed}}
       <div class="like_button">
-        <img src="assets/images/like_icon.png" alt="Like" {{on "click" this.addLike}}/>
+        <img src="assets/images/like_icon_pressed.png" alt="Like" {{on "click" this.addLike}}/>
       </div>
+      {{else}}
+        <div class="like_button">
+          <img src="assets/images/like_icon.png" alt="Like" {{on "click" this.addLike}}/>
+        </div>
+      {{/if}}
       <div class="reply_button">
         <img src="assets/images/reply_icon.png" alt="Reply"/>
       </div>
