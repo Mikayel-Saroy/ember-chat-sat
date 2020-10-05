@@ -55,6 +55,8 @@ export default class UserActionsService extends Service {
       isReply: this.isReply,
       replyMessage: this.replyMessage,
     });
+    this.isReply = false;
+    this.replyMessage = '';
     return messageModel.save();
   }
 
