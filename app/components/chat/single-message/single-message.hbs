@@ -7,7 +7,6 @@
         <p>{{@message.replyMessage}}</p>
       </div>
     {{/if}}
-
     <div class="username">{{@message.email}}</div>
     <div class="new_message_mark">{{this.messageMark}}</div>
     <div class="message_content">{{@message.content}}</div>
@@ -27,15 +26,9 @@
           <img src="assets/images/like_icon.png" alt="Like" {{on "click" this.addLike}}/>
         </div>
       {{/if}}
-      {{#if this.isReplyButtonPressed}}
-        <div class="reply_button">
-          <img src="assets/images/reply_icon_pressed.png" alt="Reply" {{on "click" this.replyToMessage}}/>
-        </div>
-      {{else}}
-        <div class="reply_button">
-          <img src="assets/images/reply_icon.png" alt="Reply" {{on "click" this.replyToMessage}}/>
-        </div>
-      {{/if}}
+      <div class="reply_button">
+        <img src="assets/images/reply_icon.png" alt="Reply" {{on "click" this.replyToMessage}}/>
+      </div>
     </div>
   </div>
 {{/if}}

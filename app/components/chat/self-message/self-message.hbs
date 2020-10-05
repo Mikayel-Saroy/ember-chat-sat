@@ -23,5 +23,16 @@
       </div>
     </div>
   {{/if}}
+  <div class="self_side_box">
+    <div class="likes_count_label">
+      <p>Likes: </p>
+    </div>
+    <div class="likes_count">
+      <p>1{{@message.likedBy.length}}</p>
+    </div>
+    <div class="self_reply">
+      <img src="assets/images/reply_icon_black.png" alt="reply" {{on "click" this.replyToMessage}}/>
+    </div>
+  </div>
 </div>
 

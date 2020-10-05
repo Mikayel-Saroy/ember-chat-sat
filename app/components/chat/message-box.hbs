@@ -1,5 +1,13 @@
 <div class="chat-message-box">
   <form {{on 'submit' this.sendMessage}}>
+    {{#if this.userActions.isReply}}
+    <div class="message_box_reply_message">
+      <p>{{this.userActions.replyMessage}}</p>
+      <div>
+        <img src="assets/images/close_button.png" alt="Close" {{on "click" this.closeTheReply}}/>
+      </div>
+    </div>
+    {{/if}}
     <Input id="message_box_input" type="text" class="form-control" @value={{this.message}} {{on "click" this.resetNotificationCount}} />
     <button type="submit" class="btn btn-primary">Send</button>
   </form>

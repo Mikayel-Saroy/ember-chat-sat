@@ -7,9 +7,19 @@ export default class ChatSelfMessageSelfMessageComponent extends Component {
   @service firebaseApp;
   @service store;
   @service session;
+  @service userActions;
 
   @tracked viewMode = true;
   @tracked editMessage;
+  @tracked isLikeButtonPressed = false;
+
+  @action replyToMessage() {
+    this.store.findRecord('message', this.args.message.id).then((message) => {
+      this.userActions.isReply = true;
+      this.userActions.replyMessage = message.content;
+      document.getElementById('message_box_input').focus();
+    });
+  }
 
   @action
   async changeMode() {

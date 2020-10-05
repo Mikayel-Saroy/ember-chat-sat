@@ -210,6 +210,40 @@ $grey-color: rgb(52, 58, 64);
         margin-bottom: -7px;
       }
 
+      .self_side_box {
+        display: flex;
+        position: absolute;
+        cursor: pointer;
+        margin-top: -22px;
+        margin-left: 10px;
+
+        .likes_count_label p {
+          margin-top: 3px;
+          font-family: Courier, serif;
+          font-size: 12px;
+        }
+
+        .likes_count p {
+          margin: -2px 0 0 5px;
+          font-family: Courier, serif;
+          font-size: 18px;
+        }
+
+        .self_reply {
+          @include message_icon_format;
+          margin-left: 10px;
+
+          &:hover {
+            background-color: white;
+          }
+
+          img {
+            height: 18px;
+            margin: 5px;
+          }
+        }
+      }
+
       .side_box_actions {
         display: flex;
         position: absolute;
@@ -255,6 +289,28 @@ $grey-color: rgb(52, 58, 64);
     display: flex;
     align-items: center;
     padding: 0 10px;
+
+    .message_box_reply_message {
+      position: absolute;
+      display: flex;
+      background-color: $grey-color;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      margin: -39px 0 0 30px;
+      height: 33px;
+
+      img {
+        height: 16px;
+        margin: 8px 0 0 -25px;
+      }
+
+      p {
+        color: white;
+        font-family: Courier, serif;
+        font-size: 16px;
+        padding: 5px 35px 0 10px;
+      }
+    }
 
     form {
       display: flex;

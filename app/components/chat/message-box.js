@@ -8,6 +8,11 @@ export default class ChatMessageBoxComponent extends Component {
   @service userActions;
   @service userStatus;
 
+  @action closeTheReply() {
+    this.userActions.isReply = false;
+    this.userActions.replyMessage = '';
+  }
+
   @action
   resetNotificationCount() {
     this.userStatus.newNotifications = 0;

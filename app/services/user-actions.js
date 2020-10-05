@@ -30,7 +30,6 @@ export default class UserActionsService extends Service {
       lastLoginTime: this.getTimeAndDate(),
     }, {merge: true});
 
-
     return this.store.findRecord('user', uid);
   }
 
