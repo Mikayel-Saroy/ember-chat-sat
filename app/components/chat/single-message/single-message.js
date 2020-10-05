@@ -7,11 +7,13 @@ import {tracked} from '@glimmer/tracking';
 export default class ChatSingleMessageSingleMessageComponent extends Component {
   @service session;
   @service store;
+  @service userActions;
 
   @tracked messageColor;
   @tracked messageMark = "";
   @tracked isLikeButtonPressed = false;
   @tracked likesCount;
+  @tracked isReplyButtonPressed = false;
 
   @action checkIfMessageIsLiked() {
     const myEmail = this.session.data.authenticated.user.email;
@@ -23,7 +25,6 @@ export default class ChatSingleMessageSingleMessageComponent extends Component {
 
   @action checkIfNewMessage() {
     this.checkIfMessageIsLiked();
-    // NEXT
     if (this.args.message.isNewMessage) {
       this.messageColor = this.args.newColor;
       this.messageMark = this.args.newMessageMark;
@@ -33,6 +34,22 @@ export default class ChatSingleMessageSingleMessageComponent extends Component {
       }, 7000);
     } else {
       this.messageColor = this.args.defaultColor;
+    }
+  }
+
+  @action replyToMessage() {
+    if (this.isReplyButtonPressed) {
+      this.isReplyButtonPressed = false;
+      this.userActions.isReply = false;
+      this.userActions.replyMessage = '';
+    } else {
+      this.store.findRecord('message', this.args.message.id).then((message) => {
+        console.log(message.content);
+        this.isReplyButtonPressed = true;
+        this.userActions.isReply = true;
+        this.userActions.replyMessage = message.content;
+        document.getElementById('message_box_input').focus();
+      })
     }
   }
 

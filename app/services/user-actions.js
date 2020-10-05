@@ -14,6 +14,8 @@ export default class UserActionsService extends Service {
   @service store;
   @service session;
   @tracked myLastLoginTime;
+  @tracked isReply = false;
+  @tracked replyMessage = '';
 
   async initUserData() {
     const {uid, email} = this.session.data.authenticated.user;
@@ -51,6 +53,8 @@ export default class UserActionsService extends Service {
       dateAndTime: this.getTimeAndDate(),
       more: "",
       likedBy: [],
+      isReply: this.isReply,
+      replyMessage: this.replyMessage,
     });
     return messageModel.save();
   }

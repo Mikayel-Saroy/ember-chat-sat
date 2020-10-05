@@ -8,4 +8,6 @@ export default class MessageModel extends Model {
   @attr dateAndTime;
   @attr more;
   @attr likedBy;
+  @attr isReply;
+  @attr replyMessage;
 }

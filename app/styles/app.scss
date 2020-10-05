@@ -2,6 +2,7 @@
 
 $chat-height: calc(100vh - 56px);
 $red-color: #ff2800;
+$grey-color: rgb(52, 58, 64);
 
 @mixin message_icon_format {
   height: 28px;
@@ -170,6 +171,17 @@ $red-color: #ff2800;
 
       &:hover {
         cursor: pointer;
+      }
+
+      .reply_message {
+        margin-top: 10px;
+        background-color: $grey-color;
+        border-radius: 10px;
+
+        p {
+          padding: 10px 10px 10px 20px;
+          color: white;
+        }
       }
 
       .username {

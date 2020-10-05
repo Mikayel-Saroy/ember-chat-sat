@@ -1,4 +1,9 @@
 <div class="user-message self">
+  {{#if @message.isReply}}
+    <div class="reply_message">
+      <p>{{@message.replyMessage}}</p>
+    </div>
+  {{/if}}
   {{#if this.viewMode}}
     <div>
       <div class="message_content">{{@message.content}}</div>
