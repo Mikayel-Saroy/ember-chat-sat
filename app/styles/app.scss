@@ -3,9 +3,50 @@
 $chat-height: calc(100vh - 56px);
 $red-color: #ff2800;
 
-body {
-  background-color: grey;
+@mixin message_icon_format {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgb(90, 135, 212);
+  }
 }
+
+
+// Header
+.header {
+  .current_time {
+    color: white;
+  }
+
+  .notification_icon {
+    padding-left: 30px;
+    padding-right: 60px;
+
+    img {
+      margin-top: 10px;
+      height: 20px;
+    }
+
+    .notification_count {
+      position: absolute;
+      margin-top: -26px;
+      margin-left: 25px;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      background-color: cornflowerblue;
+
+      p {
+        color: white;
+        text-align: center;
+        margin-top: 3px;
+      }
+    }
+  }
+}
+
 
 // USERS
 .chat-users {
@@ -46,6 +87,7 @@ body {
   }
 }
 
+
 // MESSAGES
 .chat-messages {
   height: $chat-height;
@@ -69,37 +111,6 @@ body {
       border-radius: 10px;
       margin-bottom: 10px;
       position: relative;
-
-      .side_box_actions {
-        display: flex;
-        position: absolute;
-        cursor: pointer;
-        margin-top: -15px;
-
-        img {
-          height: 18px;
-        }
-
-        div {
-          margin-left: 15px;
-        }
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      .new_message_mark {
-      }
-
-      .message_more {
-        position: absolute;
-        font-size: 12px;
-        text-align: right;
-        font-family: Courier, serif;
-        margin-top: -11px;
-        margin-left: 10px;
-      }
 
       &.self {
         background-color: white;
@@ -157,6 +168,10 @@ body {
         }
       }
 
+      &:hover {
+        cursor: pointer;
+      }
+
       .username {
         position: absolute;
         top: 3px;
@@ -170,6 +185,50 @@ body {
         top: 3px;
         height: 5px;
         font-size: 10px;
+      }
+
+      .message_content {
+        padding-bottom: 13px;
+      }
+
+      .date_and_time {
+        font-size: 12px;
+        text-align: right;
+        font-family: Courier, serif;
+        margin-bottom: -7px;
+      }
+
+      .side_box_actions {
+        display: flex;
+        position: absolute;
+        cursor: pointer;
+        margin-top: -22px;
+        margin-left: 10px;
+
+        .likes_count p {
+          margin-top: 4px;
+          font-family: Courier, serif;
+        }
+
+        .like_button {
+          @include message_icon_format;
+          margin-left: 3px;
+
+          img {
+            margin-left: 6px;
+            height: 18px;
+          }
+        }
+
+        .reply_button {
+          @include message_icon_format;
+          margin-left: 10px;
+
+          img {
+            margin-left: 3px;
+            height: 18px;
+          }
+        }
       }
     }
   }
@@ -196,49 +255,11 @@ body {
   }
 }
 
+
+// OTHER
 .not_found_page {
   font-size: 33px;
   color: $red-color;
   text-align: center;
   padding-top: 25px;
 }
-
-.date_and_time {
-  font-size: 12px;
-  text-align: right;
-  font-family: Courier, serif;
-  margin-bottom: -7px;
-}
-
-// Header
-.current_time {
-  color: white;
-}
-
-.notification_icon {
-  padding-left: 30px;
-  padding-right: 60px;
-
-  img {
-    margin-top: 10px;
-    height: 20px;
-  }
-
-  .notification_count {
-    position: absolute;
-    margin-top: -26px;
-    margin-left: 25px;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: cornflowerblue;
-
-    p {
-      color: white;
-      text-align: center;
-      margin-top: 3px;
-    }
-  }
-}
-
-// OTHER

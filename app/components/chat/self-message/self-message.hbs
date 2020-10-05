@@ -1,14 +1,11 @@
 <div class="user-message self">
   {{#if this.viewMode}}
     <div>
-      <div>
-        {{@message.content}}
-      </div>
+      <div class="message_content">{{@message.content}}</div>
       <img src="assets/images/edit_icon.png" alt="Edit" {{on 'click' this.changeMode}}/>
       <div class="date_and_time">
-        {{@message.dateAndTime}}
+        {{@message.more}} {{@message.dateAndTime}}
       </div>
-      <div class="message_more">{{@message.more}}</div>
     </div>
   {{else}}
     <Input @value={{this.editMessage}}/>
