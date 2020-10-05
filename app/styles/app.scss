@@ -3,6 +3,11 @@
 $chat-height: calc(100vh - 56px);
 $red-color: #ff2800;
 
+body {
+  background-color: grey;
+}
+
+// USERS
 .chat-users {
   height: $chat-height;
   border-right: 1px solid darkgrey;
@@ -41,6 +46,7 @@ $red-color: #ff2800;
   }
 }
 
+// MESSAGES
 .chat-messages {
   height: $chat-height;
   border-right: 1px solid darkgrey;
@@ -64,6 +70,25 @@ $red-color: #ff2800;
       margin-bottom: 10px;
       position: relative;
 
+      .side_box_actions {
+        display: flex;
+        position: absolute;
+        cursor: pointer;
+        margin-top: -15px;
+
+        img {
+          height: 18px;
+        }
+
+        div {
+          margin-left: 15px;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
       .new_message_mark {
       }
 
@@ -74,10 +99,6 @@ $red-color: #ff2800;
         font-family: Courier, serif;
         margin-top: -11px;
         margin-left: 10px;
-      }
-
-      &:hover {
-        border-right: 75px solid rgb(90, 135, 212);;
       }
 
       &.self {
@@ -189,6 +210,7 @@ $red-color: #ff2800;
   margin-bottom: -7px;
 }
 
+// Header
 .current_time {
   color: white;
 }
@@ -218,3 +240,5 @@ $red-color: #ff2800;
     }
   }
 }
+
+// OTHER

@@ -11,15 +11,7 @@ export default class UserStatusService extends Service {
   @tracked userStatuses = {};
   @tracked newNotifications = 0;
 
-  defineNotificationStatusWidth(count) {
-    this.newNotifications = count;
-    if (count < 10) this.notificationStatusWidth = '30px';
-    if (count < 100) this.notificationStatusWidth = '30px';
-    if (count < 1000) this.notificationStatusWidth = '30px';
-  }
-
   async initUserStatus() {
-
     const auth = await this.firebaseApp.auth();
     const database = await this.firebaseApp.database();
 
