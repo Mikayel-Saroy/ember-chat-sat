@@ -8,6 +8,8 @@ export default class ChatMessageBoxComponent extends Component {
   @service userActions;
   @service userStatus;
 
+  @tracked isEmojiBoxActivated = true;
+
   @action closeTheReply() {
     this.userActions.isReply = false;
     this.userActions.replyMessage = '';

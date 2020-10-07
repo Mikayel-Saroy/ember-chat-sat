@@ -3,6 +3,7 @@
 $chat-height: calc(100vh - 56px);
 $red-color: #ff2800;
 $grey-color: rgb(52, 58, 64);
+$dark-white: rgb(230, 230, 230);
 
 @mixin message_icon_format {
   height: 28px;
@@ -168,7 +169,7 @@ $grey-color: rgb(52, 58, 64);
         }
 
         &:hover {
-          background-color: rgb(230, 230, 230);
+          background-color: $dark-white;
           cursor: pointer;
         }
       }
@@ -322,6 +323,27 @@ $grey-color: rgb(52, 58, 64);
         font-family: Courier, serif;
         font-size: 16px;
         padding: 5px 35px 0 10px;
+      }
+    }
+
+    .emoji_table {
+      position: absolute;
+    }
+
+    .emoji_select_icon {
+      margin: 0 11px 0 0;
+      height: 39px;
+      width: 44px;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $dark-white;
+      }
+
+      img {
+        margin: 7px 0 0 7px;
+        height: 25px;
+        width: 25px;
       }
     }
 

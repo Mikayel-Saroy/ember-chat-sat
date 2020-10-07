@@ -1,14 +1,42 @@
 <div class="chat-message-box">
   <form {{on 'submit' this.sendMessage}}>
     {{#if this.userActions.isReply}}
-    <div class="message_box_reply_message">
-      <p>{{this.userActions.replyMessage}}</p>
-      <div>
-        <img src="assets/images/close_button.png" alt="Close" {{on "click" this.closeTheReply}}/>
+      <div class="message_box_reply_message">
+        <p>{{this.userActions.replyMessage}}</p>
+        <div>
+          <img src="assets/images/close_button.png" alt="Close" {{on "click" this.closeTheReply}}/>
+        </div>
       </div>
-    </div>
     {{/if}}
-    <Input id="message_box_input" type="text" class="form-control" @value={{this.message}} {{on "click" this.resetNotificationCount}} />
+<!--    {{#if this.isEmojiBoxActivated}}-->
+<!--      <div class="emoji_table">-->
+<!--        <table>-->
+<!--          <tr>-->
+<!--            <td>&#8986;</td>-->
+<!--            <td>&#9410;</td>-->
+<!--            <td>&#128514;</td>-->
+<!--            <td>&#128515;</td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>&#128517;</td>-->
+<!--            <td>&#128518;</td>-->
+<!--            <td>&#128519;</td>-->
+<!--            <td>&#128520;</td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>&#128521;</td>-->
+<!--            <td>&#128522;</td>-->
+<!--            <td>&#128525;</td>-->
+<!--            <td>&#128526;</td>-->
+<!--          </tr>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    {{/if}}-->
+    <Input id="message_box_input" type="text" class="form-control"
+           @value={{this.message}} {{on "click" this.resetNotificationCount}}/>
+<!--    <div class="emoji_select_icon">-->
+<!--      <img src="assets/images/emoji_icon.png" alt="Emoji"/>-->
+<!--    </div>-->
     <button type="submit" class="btn btn-primary">Send</button>
   </form>
 </div>
