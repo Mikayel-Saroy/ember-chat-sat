@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import {tracked} from "@glimmer/tracking";
 import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
+import message from "../../../models/message";
 
 export default class ChatSelfMessageSelfMessageComponent extends Component {
   @service firebaseApp;
@@ -12,6 +13,7 @@ export default class ChatSelfMessageSelfMessageComponent extends Component {
   @tracked viewMode = true;
   @tracked editMessage;
   @tracked isLikeButtonPressed = false;
+  @tracked isDeleted = false;
 
   @action replyToMessage() {
     this.store.findRecord('message', this.args.message.id).then((message) => {
@@ -27,12 +29,20 @@ export default class ChatSelfMessageSelfMessageComponent extends Component {
     this.viewMode = !this.viewMode;
   }
 
-  @action
-  submitEditedMessage() {
+  @action deleteMessage() {
+    this.store.findRecord('message', this.args.message.id).then(message => {
+      message.deleteRecord();
+      message.save();
+    }).then(() => {
+      this.isDeleted = true;
+    })
+  }
+
+  @action submitEditedMessage() {
     this.args.message.content = this.editMessage;
     this.store.findRecord('message', this.args.message.id).then((message) => {
       message.content = this.editMessage;
-      message.more = "Edited"
+      message.more = "Edited";
       message.save();
     }).then(() => {
       this.viewMode = true;

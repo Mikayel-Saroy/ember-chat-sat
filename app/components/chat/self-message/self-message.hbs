@@ -1,38 +1,49 @@
-<div class="user-message self">
-  {{#if @message.isReply}}
-    <div class="reply_message">
-      <p>{{@message.replyMessage}}</p>
-    </div>
-  {{/if}}
-  {{#if this.viewMode}}
-    <div>
-      <div class="message_content">{{@message.content}}</div>
-      <img src="assets/images/edit_icon.png" alt="Edit" {{on 'click' this.changeMode}}/>
-      <div class="date_and_time">
-        {{@message.more}} {{@message.dateAndTime}}
+{{#if this.isDeleted}}
+  <div class="deleted_message self">
+    <p>This message has been deleted.</p>
+  </div>
+{{else}}
+  <div class="user-message self">
+    {{#if @message.isReply}}
+      <div class="reply_message">
+        <p>{{@message.replyMessage}}</p>
       </div>
-    </div>
-  {{else}}
-    <Input @value={{this.editMessage}}/>
-    <div class="edit_cancel_buttons">
-      <div class="cancel_button">
-        <button class="btn btn-secondary" {{on 'click' this.changeMode}}><p>Cancel</p></button>
+    {{/if}}
+    {{#if this.viewMode}}
+      <div>
+        <div class="message_content">{{@message.content}}</div>
+        <img src="assets/images/edit_icon.png" alt="Edit" {{on 'click' this.changeMode}}/>
+        <div class="date_and_time">
+          {{@message.more}} {{@message.dateAndTime}}
+        </div>
       </div>
-      <div class="edit_button">
-        <button class="btn btn-primary" {{on 'click' this.submitEditedMessage}}><p>Edit</p></button>
+    {{else}}
+      <Input @value={{this.editMessage}}/>
+      <div class="edit_cancel_buttons">
+        <div class="cancel_button">
+          <button class="btn btn-secondary" {{on 'click' this.changeMode}}><p>Cancel</p></button>
+        </div>
+        {{#if this.editMessage}}
+          <div class="edit_button">
+            <button class="btn btn-primary" {{on 'click' this.submitEditedMessage}}><p>Edit</p></button>
+          </div>
+        {{else}}
+          <div class="edit_button">
+            <button class="btn btn-danger" {{on 'click' this.deleteMessage}}><p>Delete</p></button>
+          </div>
+        {{/if}}
       </div>
-    </div>
-  {{/if}}
-  <div class="self_side_box">
-    <div class="likes_count_label">
-      <p>Likes: </p>
-    </div>
-    <div class="likes_count">
-      <p>1{{@message.likedBy.length}}</p>
-    </div>
-    <div class="self_reply">
-      <img src="assets/images/reply_icon_black.png" alt="reply" {{on "click" this.replyToMessage}}/>
+    {{/if}}
+    <div class="self_side_box">
+      <div class="likes_count_label">
+        <p>Likes: </p>
+      </div>
+      <div class="likes_count">
+        <p>{{@message.likedBy.length}}</p>
+      </div>
+      <div class="self_reply">
+        <img src="assets/images/reply_icon_black.png" alt="reply" {{on "click" this.replyToMessage}}/>
+      </div>
     </div>
   </div>
-</div>
-
+{{/if}}

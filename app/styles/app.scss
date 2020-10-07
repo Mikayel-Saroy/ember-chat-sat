@@ -105,6 +105,10 @@ $grey-color: rgb(52, 58, 64);
     position: absolute;
     padding: 20px;
 
+    .deleted_message {
+      @extend .user-message;
+    }
+
     .user-message {
       max-width: 40%;
       padding: 15px 10px 10px 10px;
@@ -141,7 +145,7 @@ $grey-color: rgb(52, 58, 64);
               margin-top: 5px;
               width: 80px;
               height: 30px;
-              margin-left: calc(100% - 60px);
+              margin-left: calc(100% - 70px);
 
               p {
                 margin-top: -4px;
@@ -152,9 +156,9 @@ $grey-color: rgb(52, 58, 64);
           .edit_button {
             button {
               margin-top: 5px;
-              width: 60px;
+              width: 70px;
               height: 30px;
-              margin-left: calc(100% - 60px);
+              margin-left: calc(100% - 70px);
 
               p {
                 margin-top: -4px;

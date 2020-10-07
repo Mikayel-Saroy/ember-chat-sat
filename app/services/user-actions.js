@@ -19,8 +19,11 @@ export default class UserActionsService extends Service {
 
   async initUserData() {
     const {uid, email} = this.session.data.authenticated.user;
+    console.log(uid, email, "<---");
     const firestore = await this.firebaseApp.firestore();
     this.myLastLoginTime = await firestore.collection("users").doc(uid).get();
+    console.log(this.myLastLoginTime, "NEXT");
+    console.log(this.myLastLoginTime.data(), "NEXT");
     this.myLastLoginTime = this.myLastLoginTime.data().lastLogin;
     await firestore.collection('users').doc(uid).set({
       uid,

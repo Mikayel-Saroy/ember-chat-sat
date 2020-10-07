@@ -15,8 +15,8 @@ export default class RegistrationRegistrationComponent extends Component {
   @service userStatus;
 
   @tracked validation = {
-    @tracked email: '',
-    @tracked password: '',
+    @tracked email: '@gmail.com',
+    @tracked password: '333333',
     @tracked isErrorColor: DEFAULT_COLOR,
     @tracked labelMessageLogin: LABEL_LOGIN_DEFAULT_MESSAGE,
     @tracked labelMessageRegistration: LABEL_REGISTRATION_DEFAULT_MESSAGE,

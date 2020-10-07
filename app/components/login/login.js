@@ -30,7 +30,6 @@ export default class LoginLoginComponent extends Component {
   @action
   async onSubmit() {
     const auth = await this.firebaseApp.auth();
-
     try {
       await auth.signInWithEmailAndPassword(this.validation.email, this.validation.password);
       await this.userActions.initUserData();
