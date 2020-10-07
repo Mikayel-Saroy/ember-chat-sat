@@ -15,7 +15,8 @@
     </div>
     <div class="side_box_actions">
       <div class="likes_count">
-        <p>{{this.likesCount}}</p>
+        <p onmouseover={{action this.showUsersWhoLikedTheMessage true}}
+           onmouseout={{action this.showUsersWhoLikedTheMessage false}}>{{this.likesCount}}</p>
       </div>
       {{#if this.isLikeButtonPressed}}
         <div class="like_button">
@@ -29,6 +30,13 @@
       <div class="reply_button">
         <img src="assets/images/reply_icon.png" alt="Reply" {{on "click" this.replyToMessage}}/>
       </div>
+      {{#if this.showUsersLiked}}
+        <div class="list_of_liked">
+          {{#each @message.likedBy as |user|}}
+            <p>{{user}}</p>
+          {{/each}}
+        </div>
+      {{/if}}
     </div>
   </div>
 {{/if}}

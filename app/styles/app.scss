@@ -280,6 +280,15 @@ $grey-color: rgb(52, 58, 64);
           }
         }
       }
+
+      .list_of_liked {
+        padding: 14px 14px 0 14px;
+        line-height: 12px;
+        background-color: $grey-color;
+        border-radius: 10px;
+        color: white;
+        z-index: 99;
+      }
     }
   }
 

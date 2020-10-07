@@ -39,11 +39,19 @@
         <p>Likes: </p>
       </div>
       <div class="likes_count">
-        <p>{{@message.likedBy.length}}</p>
+        <p onmouseover={{action this.showUsersWhoLikedTheMessage true}}
+           onmouseout={{action this.showUsersWhoLikedTheMessage false}}>{{@message.likedBy.length}}</p>
       </div>
       <div class="self_reply">
         <img src="assets/images/reply_icon_black.png" alt="reply" {{on "click" this.replyToMessage}}/>
       </div>
+      {{#if this.showUsersLiked}}
+        <div class="list_of_liked">
+          {{#each @message.likedBy as |user|}}
+            <p>{{user}}</p>
+          {{/each}}
+        </div>
+      {{/if}}
     </div>
   </div>
 {{/if}}

@@ -14,6 +14,13 @@ export default class ChatSelfMessageSelfMessageComponent extends Component {
   @tracked editMessage;
   @tracked isLikeButtonPressed = false;
   @tracked isDeleted = false;
+  @tracked showUsersLiked = false;
+
+  @action showUsersWhoLikedTheMessage(mouseOver) {
+    if (this.args.message.likedBy.length !== 0) {
+      setTimeout(() => this.showUsersLiked = !!mouseOver, 500);
+    }
+  }
 
   @action replyToMessage() {
     this.store.findRecord('message', this.args.message.id).then((message) => {
@@ -27,7 +34,7 @@ export default class ChatSelfMessageSelfMessageComponent extends Component {
   async changeMode() {
     this.editMessage = this.args.message.content;
     this.viewMode = !this.viewMode;
-    setTimeout(() => document.getElementById('edit_input').focus(), 1000);
+    setTimeout(() => document.getElementById('edit_input').focus(), 100);
   }
 
   @action deleteMessage() {

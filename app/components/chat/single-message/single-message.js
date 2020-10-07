@@ -13,6 +13,13 @@ export default class ChatSingleMessageSingleMessageComponent extends Component {
   @tracked messageMark = "";
   @tracked isLikeButtonPressed = false;
   @tracked likesCount;
+  @tracked showUsersLiked = false;
+
+  @action showUsersWhoLikedTheMessage(mouseOver) {
+    if (this.args.message.likedBy.length !== 0) {
+      setTimeout(() => this.showUsersLiked = !!mouseOver, 500);
+    }
+  }
 
   @action checkIfMessageIsLiked() {
     const myEmail = this.session.data.authenticated.user.email;
@@ -39,7 +46,6 @@ export default class ChatSingleMessageSingleMessageComponent extends Component {
   @action replyToMessage() {
     this.store.findRecord('message', this.args.message.id).then((message) => {
       console.log(message.content);
-      this.isReplyButtonPressed = true;
       this.userActions.isReply = true;
       this.userActions.replyMessage = message.content;
       document.getElementById('message_box_input').focus();
