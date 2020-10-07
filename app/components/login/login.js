@@ -32,13 +32,13 @@ export default class LoginLoginComponent extends Component {
     const auth = await this.firebaseApp.auth();
     try {
       await auth.signInWithEmailAndPassword(this.validation.email, this.validation.password);
-      await this.userActions.initUserData();
-      this.validation = this.userActions.validationFunction(true, this.validation);
+      await this.userActions.initUserData(true);
+      this.validation = this.userActions.validationFunction(true, this.validation, false);
       await this.userStatus.initUserStatus();
       this.router.transitionTo('chat');
     } catch (error) {
       console.log(error);
-      this.validation = this.userActions.validationFunction(false, this.validation);
+      this.validation = this.userActions.validationFunction(false, this.validation, false);
     }
   }
 }

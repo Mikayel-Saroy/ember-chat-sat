@@ -2,9 +2,10 @@ import Service, {inject as service} from '@ember/service';
 import {tracked} from "@glimmer/tracking";
 
 const LABEL_LOGIN_ERROR_MESSAGE = "Email: Enter a Valid Data";
-const LABEL_REGISTRATION_ERROR_MESSAGE = "Password: Enter a Valid Data";
+const LABEL_LOGIN_REGISTRATION_ERROR_MESSAGE = "Email: This email is already in use, Enter a Valid Data";
+const LABEL_PASSWORD_ERROR_MESSAGE = "Password: Enter a Valid Data";
 const LABEL_LOGIN_DEFAULT_MESSAGE = "Email";
-const LABEL_REGISTRATION_DEFAULT_MESSAGE = "Password";
+const LABEL_PASSWORD_DEFAULT_MESSAGE = "Password";
 const DEFAULT_COLOR = "black";
 const ERROR_COLOR = "red";
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -17,14 +18,13 @@ export default class UserActionsService extends Service {
   @tracked isReply = false;
   @tracked replyMessage = '';
 
-  async initUserData() {
+  async initUserData(isNotNew) {
     const {uid, email} = this.session.data.authenticated.user;
-    console.log(uid, email, "<---");
     const firestore = await this.firebaseApp.firestore();
-    this.myLastLoginTime = await firestore.collection("users").doc(uid).get();
-    console.log(this.myLastLoginTime, "NEXT");
-    console.log(this.myLastLoginTime.data(), "NEXT");
-    this.myLastLoginTime = this.myLastLoginTime.data().lastLogin;
+    if (isNotNew) {
+      this.myLastLoginTime = await firestore.collection("users").doc(uid).get();
+      this.myLastLoginTime = this.myLastLoginTime.data().lastLogin;
+    }
     await firestore.collection('users').doc(uid).set({
       uid,
       email,
@@ -63,19 +63,24 @@ export default class UserActionsService extends Service {
     return messageModel.save();
   }
 
-  validationFunction(hasError, validation) {
+  validationFunction(hasError, validation, isRegistration) {
     if (hasError) {
       validation.email = "";
       validation.password = "";
       validation.labelMessageLogin = LABEL_LOGIN_DEFAULT_MESSAGE;
-      validation.labelMessageRegistration = LABEL_REGISTRATION_DEFAULT_MESSAGE;
+      validation.labelMessageRegistration = LABEL_PASSWORD_DEFAULT_MESSAGE;
       validation.isErrorColor = DEFAULT_COLOR;
     } else {
       validation.email = "";
       validation.password = "";
-      validation.labelMessageLogin = LABEL_LOGIN_ERROR_MESSAGE;
-      validation.labelMessageRegistration = LABEL_REGISTRATION_ERROR_MESSAGE;
       validation.isErrorColor = ERROR_COLOR;
+      if (isRegistration) {
+        validation.labelMessageLogin = LABEL_LOGIN_REGISTRATION_ERROR_MESSAGE;
+        validation.labelMessageRegistration = LABEL_PASSWORD_ERROR_MESSAGE;
+      } else {
+        validation.labelMessageLogin = LABEL_LOGIN_ERROR_MESSAGE;;
+        validation.labelMessageRegistration = LABEL_PASSWORD_ERROR_MESSAGE;
+      }
     }
     return validation;
   }
