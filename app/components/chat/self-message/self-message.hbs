@@ -18,7 +18,7 @@
         </div>
       </div>
     {{else}}
-      <Input @value={{this.editMessage}}/>
+      <Input id="edit_input" type="text" @value={{this.editMessage}}/>
       <div class="edit_cancel_buttons">
         <div class="cancel_button">
           <button class="btn btn-secondary" {{on 'click' this.changeMode}}><p>Cancel</p></button>

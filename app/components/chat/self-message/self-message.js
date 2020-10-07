@@ -27,6 +27,7 @@ export default class ChatSelfMessageSelfMessageComponent extends Component {
   async changeMode() {
     this.editMessage = this.args.message.content;
     this.viewMode = !this.viewMode;
+    setTimeout(() => document.getElementById('edit_input').focus(), 1000);
   }
 
   @action deleteMessage() {
